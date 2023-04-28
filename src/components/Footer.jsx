@@ -1,13 +1,32 @@
 import styles from "../style";
-import { koya } from "../assets";
-import { footerLinks, socialMedia } from "../constants";
+import { footerLinks } from "../constants";
+import { useState, useEffect } from "react";
 
-const Footer = () => (
+const Footer = () => {
+  const [logo, setLogo] = useState([]);
+  useEffect(()=>{
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = '/login';
+    } else {
+      fetch('http://localhost:8000/api/company-name', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      
+        .then(response => response.json())
+        .then(json =>setLogo(json))
+        .catch(e => console.log(e));
+    }
+  },[]);
+
+return(
   <section className={`${styles.flexCenter} ${styles.paddingY} flex-col`}>
     <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>
       <div className="flex-[1] flex flex-col justify-start mr-10">
         <img
-          src={koya}
+          src={`http://localhost:8000${logo.image_url}`}
           alt="hoobank"
           className="w-[266px] h-[72.14px] object-contain"
         />
@@ -42,7 +61,7 @@ const Footer = () => (
         Copyright Ⓒ 2023 Expense Management System. All Rights Reserved.
       </p>
 
-      <div className="flex flex-row md:mt-0 mt-6">
+      {/* <div className="flex flex-row md:mt-0 mt-6">
         {socialMedia.map((social, index) => (
           <img
             key={social.id}
@@ -54,9 +73,9 @@ const Footer = () => (
             onClick={() => window.open(social.link)}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   </section>
 );
-
+}
 export default Footer;

@@ -1,9 +1,8 @@
 import React from 'react';
-
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
-import Accountant from './Accountant';
+import Expenses from './Expenses';
 import AddExpense from './AddExpense';
 import Account from './Account';
 import Expense from './Expense';
@@ -21,8 +20,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           key={Math.random()}
          />
          <Route
-         path='/accountant'
-         Component={Accountant}
+         path='/expenses'
+         Component={Expenses}
          key={Math.random()}
           />
           <Route

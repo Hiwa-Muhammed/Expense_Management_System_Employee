@@ -1,20 +1,21 @@
 import styles from "./style";
-import { CTA, Footer, Navbar } from "./components";
+import {Footer, Navbar, EmpTable, Stats } from "./components";
 
-const Accountant = () => (
+const Expenses = () => (
   <div id="Accountant" className="bg-primary w-full overflow-hidden">
     <div className={`${styles.paddingX} ${styles.flexCenter}`}>
       <div className={`${styles.boxWidth}`}>
         <Navbar />
       </div>
-    </div>
+    </div>   
     <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
-      <div className={`${styles.boxWidth}`}>
-      <AddExpenseComponent />
-      <Footer />
+      <div className={`${styles.boxWidth}`} >
+        <Stats />
+        <EmpTable />
+        <Footer />
       </div>
     </div>
   </div>
 );
 
-export default Accountant;
+export default Expenses;
