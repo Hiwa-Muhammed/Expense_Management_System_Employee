@@ -1,5 +1,5 @@
 import styles from "./style";
-import { Billing, Business, CardDeal, Clients, CTA, Footer, Navbar, Stats, Testimonials, Hero } from "./components";
+import { LatestExpenses, CTA, Footer, Navbar, Stats, IntroductoryComponent } from "./components";
 
 const App = () => {
   // check if the user is logged in
@@ -22,20 +22,15 @@ const App = () => {
 
       <div className={`bg-primary ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
-          <Hero />
+          <IntroductoryComponent />
         </div>
       </div>
       
       <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Stats />
-          <Business />
-          {/* <Billing />
-          <CardDeal />
-          <Testimonials />
-          <Clients />
-          <CTA /> */}
-          <CTA />
+          <LatestExpenses />
+          <AddExpenseComponent />
           <Footer />
         </div>
       </div>

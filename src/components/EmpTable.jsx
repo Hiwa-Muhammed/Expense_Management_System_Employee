@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable } from 'primereact/datatable';
@@ -7,14 +6,10 @@ import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
-import { ProgressBar } from 'primereact/progressbar';
 import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
-import { Slider } from 'primereact/slider';
 import { Tag } from 'primereact/tag';
-import {feul} from '../assets';
-
-// import { CustomerService } from './service/CustomerService';
+import {feul,travel,food,Education,MobileCard,CarService,HealthCare,Transportation,Gift} from '../assets';
 
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";     
@@ -81,19 +76,12 @@ export default function CustomersDemo() {
         }
     };
 
-
-
-    // useEffect(() => {
-    //     CustomerService.getCustomersLarge().then((data) => setCustomers(getCustomers(data)));
-    // }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-
     useEffect(()=>{
         const token = localStorage.getItem("token");
         if (!token) {
           window.location.href = '/login';
         } else {
-          fetch('http://192.168.1.109/collage-project/public/api/expense', {
+          fetch('http://localhost:8000/api/expense', {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -102,47 +90,16 @@ export default function CustomersDemo() {
           .then(response => response.json())
           .then(json => setExpenses(json))
           .catch(e=>console.log(e))
+          .catch(error=> console.log(error))
         }
       },[]);
 
-    // useEffect(()=>{
-    //     fetch('http://192.168.1.109/collage-project/public/api/expense' ,{
-    //         headers: {
-    //             Authorization: `Bearer ${token}`,
-    //           },
-    //     })
-    //         .then(response => response.json())
-    //         .then(json => setExpenses(json))
-    //         .catch(e=>console.log(e))
-    // },[])
-
-    console.log(expenses)
-
-    // console.log(Object.entries(expenses.expense));
-
-
-
-
-    const getExpenses = (sayd) => {
-        return [...(sayd || [])].map((d) => {
-            d.date = new Date(d.date);
-
-            return d;
-        });
-    };
-
 
     const formatDate = (value) => {
-        // return value.toLocaleDateString('en-US', {
-        //     day: '2-digit',
-        //     month: '2-digit',
-        //     year: 'numeric'
-        // });
         return value;
     };
 
     const formatCurrency = (value) => {
-        // return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
         return value;
     };
 
@@ -167,25 +124,73 @@ export default function CustomersDemo() {
             </div>
         );
     };
-
-    const countryBodyTemplate = (rowData) => {
-        return (
-            <div className="flex align-items-center gap-2">
-                <img alt="flag" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${rowData.country.code}`} style={{ width: '24px' }} />
-                <span>{rowData.country.name}</span>
-            </div>
-        );
-    };
-
     const representativeBodyTemplate = (rowData) => {
         const representative = rowData.category;
 
+        if(representative==="Fuel"){
         return (
             <div className="flex align-items-center gap-2">
                 <img src={feul} width="32" />
                 <span>{representative}</span>
             </div>
         );
+        }else if(representative==="Food"){
+            return (
+                <div className="flex align-items-center gap-2">
+                    <img src={food} width="32" />
+                    <span>{representative}</span>
+                </div>
+            );
+        }else if(representative==="Mobile Card"){
+            return (
+                <div className="flex align-items-center gap-2">
+                    <img src={MobileCard} width="32" />
+                    <span>{representative}</span>
+                </div>
+            );
+        }else if(representative==="Car Service"){
+            return (
+                <div className="flex align-items-center gap-2">
+                    <img src={CarService} width="32" />
+                    <span>{representative}</span>
+                </div>
+            );
+        }else if(representative==="Travel"){
+            return (
+                <div className="flex align-items-center gap-2">
+                    <img src={travel} width="32" />
+                    <span>{representative}</span>
+                </div>
+            );
+        }else if(representative==="Transportation"){
+            return (
+                <div className="flex align-items-center gap-2">
+                    <img src={Transportation} width="32" />
+                    <span>{representative}</span>
+                </div>
+            );
+        }else if(representative==="Health Care"){
+            return (
+                <div className="flex align-items-center gap-2">
+                    <img src={HealthCare} width="32" />
+                    <span>{representative}</span>
+                </div>
+            );
+        }else if(representative==="Gift"){
+            return (
+                <div className="flex align-items-center gap-2">
+                    <img src={Gift} width="32" />
+                    <span>{representative}</span>
+                </div>
+            );
+        }else if(representative==="Education"){
+            return (
+                <div className="flex align-items-center gap-2">
+                    <img src={Education} width="32" />
+                    <span>{representative}</span>
+                </div>
+            );
+        }
     };
 
     const representativeFilterTemplate = (options) => {

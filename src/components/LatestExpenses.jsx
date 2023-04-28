@@ -1,16 +1,13 @@
-import { features } from "../constants";
 import styles, { layout } from "../style";
 import Button from "./Button";
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
-
-
-const FeatureCard = ({ icon, category, date, description, status, paid_back, amount, index, hiwa }) => (
+const FeatureCard = ({date, description, status, paid_back, amount, index, hiwa }) => (
   <div className={`flex flex-col p-6 rounded-[20px] ${index !== features.length - 1 ? "mb-6" : "mb-0"} feature-card`}>
     <div className={`flex flex-row`}>
       <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}>
-        <img src={`../src/assets/${category}.png`} alt="star" className="w-[50%] h-[50%] object-contain" />
+        <img src={`../src/assets/${hiwa}.png`} alt="star" className="w-[50%] h-[50%] object-contain" />
       </div>
       <div className="flex-1 flex flex-col ml-3">
         <h4 className="font-poppins font-semibold text-white text-[18px] leading-[23.4px] mb-1">
@@ -31,8 +28,8 @@ const FeatureCard = ({ icon, category, date, description, status, paid_back, amo
         </p>
       </div>
 
-      <div className={` rounded-[5px]  border ${paid_back !== "Payed Back" ? "border-red-500" : "border-green-500"}  opacity-75`}>
-        <p className={`font-poppins font-normal text-dimWhite text-[13px] m-1 ${paid_back !== "Payed Back" ? "text-red-500" : "text-green-500"} `}>
+      <div className={` rounded-[5px]  border ${paid_back !== "Paid Back" ? "border-red-500" : "border-green-500"}  opacity-75`}>
+        <p className={`font-poppins font-normal text-dimWhite text-[13px] m-1 ${paid_back !== "Paid Back" ? "text-red-500" : "text-green-500"} `}>
           {paid_back}
         </p>
       </div>
@@ -45,13 +42,7 @@ const FeatureCard = ({ icon, category, date, description, status, paid_back, amo
 );
 
 
-export default function Business()  {
-
-
-// const [expenses, setExpenses] = useState([]);
-
-
-
+export default function LatestExpenses()  {
 const navigate = useNavigate();
 
   const [expenses, setExpenses] = useState([]);
@@ -60,7 +51,7 @@ const navigate = useNavigate();
     if (!token) {
       window.location.href = '/login';
     } else {
-      fetch('http://192.168.1.109/collage-project/public/api/last-four', {
+      fetch('http://localhost:8000/api/last-four', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -97,9 +88,7 @@ const navigate = useNavigate();
       <FeatureCard hiwa={feature.category} {...feature} index={index} />
     </Link>
   ))}
-</div>
-
-
+  </div>
   </section>
   );
 }

@@ -1,31 +1,21 @@
 import Navbar from "./Navbar";
-import Billing from "./Billing";
-import CardDeal from "./CardDeal";
-import Business from "./Business";
-import Clients from "./Clients";
-import CTA from "./CTA";
+import LatestExpenses from "./LatestExpenses";
+import AddExpenseComponent from "./AddExpenseComponent";
 import Stats from "./Stats";
 import Footer from "./Footer";
-import Testimonials from "./Testimonials";
-import Hero from "./Hero";
+import IntroductoryComponent from "./IntroductoryComponent";
 import EmpTable from "./EmpTable"
-import addExpenseForm from "./addExpenseForm";
 import AccountEdit from "./AccountEdit";
 import AccountInfo from "./AccountInfo";
 
 export {
     Navbar,
-    Billing,
-    CardDeal,
-    Business,
-    Clients,
-    CTA,
+    LatestExpenses,
+    AddExpenseComponent,
     Stats,
     Footer,
-    Testimonials,
-    Hero,
+    IntroductoryComponent,
     EmpTable,
-    addExpenseForm,
     AccountInfo,
     AccountEdit,
 };

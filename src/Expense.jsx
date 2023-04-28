@@ -1,5 +1,5 @@
 import styles from "./style";
-import { Billing, Business, CardDeal, Clients, CTA, Footer, Navbar, Stats, Testimonials, Hero } from "./components";
+import { Footer, Navbar } from "./components";
 import ExpenseInfo from "./components/ExpenseInfo";
 
 const App = () => (

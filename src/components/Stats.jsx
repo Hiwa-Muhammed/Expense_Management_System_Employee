@@ -1,4 +1,3 @@
-import { stats } from "../constants";
 import styles from "../style";
 import { useState, useEffect } from "react";
 
@@ -11,7 +10,7 @@ const Stats = () => {
     if (!token) {
       history.push("/login");
     } else {
-      fetch('http://192.168.1.109/collage-project/public/api/income', {
+      fetch('http://localhost:8000/api/income', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -20,7 +19,7 @@ const Stats = () => {
         .then(json => setIncome(json))
         .catch(e => console.log(e));
 
-        fetch('http://192.168.1.109/collage-project/public/api/expense-total', {
+        fetch('http://localhost:8000/api/expense-total', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

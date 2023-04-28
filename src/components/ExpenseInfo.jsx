@@ -1,34 +1,21 @@
 import styles from "../style";
-import Button from "./Button";
-import { createWorker } from 'tesseract.js';
-import {expense} from '../assets';
-import { features } from "../constants";
 import { useParams } from 'react-router-dom';
 import { useState,useEffect } from "react";
 
-
-
-
-
-
-
 const ExpenseInfo = () => {
-
   const { id } = useParams();
-  console.log(id)
-
+  console.log(id);
   const [data, setData] = useState([]);
   useEffect(()=>{
     const token = localStorage.getItem("token");
     if (!token) {
       window.location.href = '/login';
     } else {
-      fetch(`http://192.168.1.109/collage-project/public/api/show-expense/${id} `, {
+      fetch(`http://localhost:8000/api/show-expense/${id} `, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      
         .then(response => response.json())
         .then(json =>setData(json.data))
         .catch(e => console.log(e));
@@ -39,7 +26,7 @@ const ExpenseInfo = () => {
   const handleDelete = () => {
     console.log(id)
     const token = localStorage.getItem("token");
-    fetch(`http://192.168.1.109/collage-project/public/api/delete-expense/${id}`, {
+    fetch(`http://localhost:8000/api/delete-expense/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -48,7 +35,7 @@ const ExpenseInfo = () => {
       .then(response => {
         if (response.ok) {
           console.log(response)
-          window.location.href = "http://127.0.0.1:5173";
+          window.location.href = "http://127.0.0.1:5173/";
         }else{
           console.log(response)
         }
@@ -73,23 +60,23 @@ return(
       <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-5">Price:</label>
       <p className={`${styles.paragraph} max-w-[470px] `}>{data.amount} IQD</p>
       <div className="flex flex-row pt-7 space-x-1">
-      <div className={`rounded-[5px] border ${"Accepted" === "Accepted" ? "border-green-500" : features.acc==="Pending" ? "border-yellow-500" : "border-red-500"}  opacity-75`}>
-        <p className={`font-poppins font-normal text-dimWhite text-[13px] m-1 ${"Accepted"=== "Accepted" ? "text-green-500" : features.acc==="Pending"? "text-yellow-500" : "text-red-500"} `}>
+      <div className={`rounded-[5px] border ${data.status === "Accepted" ? "border-green-500" : data.status==="Pending" ? "border-yellow-500" : "border-red-500"}  opacity-75`}>
+        <p className={`font-poppins font-normal text-dimWhite text-[13px] m-1 ${data.status=== "Accepted" ? "text-green-500" : data.status==="Pending"? "text-yellow-500" : "text-red-500"} `}>
         {data.status}
         </p>
       </div>
-      <div className={` rounded-[5px]  border ${"Payed Back" !== "Payed Back" ? "border-red-500" : "border-green-500"}  opacity-75`}>
-        <p className={`font-poppins font-normal text-dimWhite text-[13px] m-1 ${"Payed Back" !== "Payed Back" ? "text-red-500" : "text-green-500"} `}>
+      <div className={` rounded-[5px]  border ${data.paid_back !== "Paid Back" ? "border-red-500" : "border-green-500"}  opacity-75`}>
+        <p className={`font-poppins font-normal text-dimWhite text-[13px] m-1 ${data.paid_back!== "Paid Back" ? "text-red-500" : "text-green-500"} `}>
           {data.paid_back}
         </p>
       </div>
       </div>
-      <button onClick={handleDelete} type="submit"  className="p-2 px-5 text-[25px] mt-5 bg-red-gradient text-gray-900 rounded-[10px] font-semibold f">Delelte</button>
+      <button onClick={handleDelete} type="submit" className="p-2 px-5 text-[25px] mt-5 bg-red-gradient text-gray-900 rounded-[10px] font-semibold f">Delete</button>
 
     </div>
 
     <div className={`${styles.flexCenter} sm:ml-10 ml-0 sm:mt-0 mt-10`}>
-    <img src={`http://192.168.1.109/collage-project/public${data.image_url}`} class=' w-80'/>
+    <img src={`http://localhost:8000${data.image_url}`} class=' w-80'/>
     </div>
   </section>
 );

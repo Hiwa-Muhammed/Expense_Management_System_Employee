@@ -2,7 +2,7 @@ import styles from "../style";
 import { arrowUp } from "../assets";
 import { Link } from "react-router-dom";
 
-const GetStarted = () => (
+const AddExpenseFloating = () => (
   <div className={`${styles.flexCenter} w-[140px] h-[140px] rounded-full bg-blue-gradient p-[2px] cursor-pointer`}>
     <div className={`${styles.flexCenter} flex-col bg-primary w-[100%] h-[100%] rounded-full`}>
       <Link to='/addExpense'>
@@ -20,4 +20,4 @@ const GetStarted = () => (
   </div>
 );
 
-export default GetStarted;
+export default AddExpenseFloating;
