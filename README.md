@@ -4,3 +4,8 @@ first you have to install npm
 
 npm install
 
+then run:
+
+npm run dev
+
+And enjoy the beautiful design:)
